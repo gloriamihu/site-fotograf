@@ -282,6 +282,29 @@ body::before {
 .featured:hover img {
   transform: scale(1.03);
 }
+.featured-caption {
+  position: absolute;
+  left: 26px;
+  bottom: 22px;
+  z-index: 2;
+  text-align: left;
+}
+
+.featured-kicker {
+  font-size: 12px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.featured-title {
+  margin-top: 8px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 40px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.95);
+}
 
 .portfolio-grid {
   display: grid;
@@ -300,24 +323,24 @@ body::before {
 }
 
 /* Ritm editorial */
-.portfolio-grid img:nth-child(1) {
+.portfolio-grid .shot:nth-child(1) {
   grid-column: span 7;
   height: 520px;
 }
 
-.portfolio-grid img:nth-child(2) {
+.portfolio-grid .shot:nth-child(2) {
   grid-column: span 5;
   height: 520px;
 }
 
-.portfolio-grid img:nth-child(3),
-.portfolio-grid img:nth-child(4) {
+.portfolio-grid .shot:nth-child(3),
+.portfolio-grid .shot:nth-child(4) {
   grid-column: span 6;
   height: 400px;
 }
 
-.portfolio-grid img:nth-child(5),
-.portfolio-grid img:nth-child(6) {
+.portfolio-grid .shot:nth-child(5),
+.portfolio-grid .shot:nth-child(6) {
   grid-column: span 6;
   height: 380px;
 }
@@ -388,6 +411,33 @@ body::before {
 .contact-form textarea:focus {
   outline: none;
   border-color: rgba(255, 255, 255, 0.28);
+}
+
+.form-status {
+  margin: 14px 0 0;
+  font-size: 12px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 400ms ease,
+    transform 400ms ease;
+}
+
+.form-status.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.form-status.success {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.form-status.success::before {
+  content: "✓ ";
+  opacity: 0.9;
 }
 
 /* ================= FOOTER ================= */
@@ -525,4 +575,234 @@ body::before {
   .featured img {
     height: 55vh;
   }
+}
+
+.shot {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+}
+
+.shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition:
+    transform 700ms ease,
+    filter 700ms ease;
+}
+
+.shot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.45));
+  opacity: 0;
+  transition: opacity 500ms ease;
+}
+
+.shot-caption {
+  position: absolute;
+  left: 18px;
+  bottom: 16px;
+  z-index: 2;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 500ms ease,
+    transform 500ms ease;
+}
+
+.shot:hover img {
+  transform: scale(1.02);
+  filter: brightness(1.06);
+}
+
+.shot:hover::after {
+  opacity: 1;
+}
+
+.shot:hover .shot-caption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== Scroll reveal (editorial) — SAFE (only when JS is on) ===== */
+.js .reveal-init {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 700ms ease,
+    transform 700ms ease;
+}
+
+.js .reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger pentru galerie */
+.js .shot.reveal-init {
+  transition-delay: var(--d, 0ms);
+}
+
+/* ================= MICRO-INTERACTIONS ================= */
+
+:root {
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ring: rgba(255, 255, 255, 0.25);
+  --ring-strong: rgba(255, 255, 255, 0.4);
+}
+
+.btn.btn-solid {
+  background: #fff;
+  color: #0b0b0d;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+}
+
+.btn.btn-solid:hover {
+  transform: translateY(-1px);
+}
+
+/* Inputs: highlight premium */
+.contact-form input,
+.contact-form textarea {
+  transition:
+    border-color 180ms var(--ease-out),
+    box-shadow 180ms var(--ease-out),
+    transform 180ms var(--ease-out);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.08);
+}
+
+/* Optional: subtle hover lift for gallery images */
+.portfolio-grid img {
+  transform: translateZ(0);
+}
+
+.portfolio-grid img:hover {
+  transform: scale(1.02) translateY(-2px);
+}
+
+/* ================= MODAL ================= */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: none; /* hidden by default */
+}
+
+.modal.is-open {
+  display: block;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(8px);
+}
+
+.modal-card {
+  position: relative;
+  width: min(520px, calc(100% - 32px));
+  margin: 16vh auto 0;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 18px;
+  padding: 28px;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(14px);
+
+  transform: translateY(14px) scale(0.985);
+  opacity: 0;
+  transition:
+    transform 220ms var(--ease-out),
+    opacity 220ms var(--ease-out);
+}
+
+.modal.is-open .modal-card {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.modal-title {
+  margin: 0 0 10px 0;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 28px;
+  letter-spacing: 0.6px;
+}
+
+.modal-text {
+  margin: 0 0 18px 0;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.65;
+}
+
+.modal-actions {
+  margin-top: 18px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.modal-x {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.18);
+  color: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+  transition:
+    background 180ms var(--ease-out),
+    transform 180ms var(--ease-out);
+}
+
+.modal-x:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+}
+
+/* ================= TOAST ================= */
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%) translateY(10px);
+  opacity: 0;
+  pointer-events: none;
+
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.92);
+  padding: 10px 14px;
+  border-radius: 14px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
+
+  transition:
+    opacity 220ms var(--ease-out),
+    transform 220ms var(--ease-out);
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }

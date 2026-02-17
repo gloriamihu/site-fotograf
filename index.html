@@ -67,39 +67,67 @@
               alt="Featured"
               loading="lazy"
             />
+
+            <div class="featured-caption">
+              <div class="featured-kicker">Selected Work</div>
+              <div class="featured-title">Editorial Series</div>
+            </div>
           </div>
 
           <div class="portfolio-grid">
-            <img
-              loading="lazy"
-              src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80"
-              alt=""
-            />
-            <img
-              loading="lazy"
-              src="https://images.unsplash.com/photo-1529636798458-92182e662485?auto=format&fit=crop&w=800&q=80"
-              alt=""
-            />
-            <img
-              loading="lazy"
-              src="https://images.unsplash.com/photo-1495567720989-cebdbdd97913?auto=format&fit=crop&w=800&q=80"
-              alt=""
-            />
-            <img
-              loading="lazy"
-              src="https://images.unsplash.com/photo-1505685296765-3a2736de412f?auto=format&fit=crop&w=800&q=80"
-              alt=""
-            />
-            <img
-              loading="lazy"
-              src="https://images.unsplash.com/photo-1487412912498-0447578fcca8?auto=format&fit=crop&w=800&q=80"
-              alt=""
-            />
-            <img
-              loading="lazy"
-              src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80"
-              alt=""
-            />
+            <div class="shot">
+              <img
+                loading="lazy"
+                src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80"
+                alt=""
+              />
+              <div class="shot-caption">Portrait</div>
+            </div>
+
+            <div class="shot">
+              <img
+                loading="lazy"
+                src="https://images.unsplash.com/photo-1529636798458-92182e662485?auto=format&fit=crop&w=800&q=80"
+                alt=""
+              />
+              <div class="shot-caption">Editorial</div>
+            </div>
+
+            <div class="shot">
+              <img
+                loading="lazy"
+                src="https://images.unsplash.com/photo-1495567720989-cebdbdd97913?auto=format&fit=crop&w=800&q=80"
+                alt=""
+              />
+              <div class="shot-caption">Wedding</div>
+            </div>
+
+            <div class="shot">
+              <img
+                loading="lazy"
+                src="https://images.unsplash.com/photo-1505685296765-3a2736de412f?auto=format&fit=crop&w=800&q=80"
+                alt=""
+              />
+              <div class="shot-caption">Details</div>
+            </div>
+
+            <div class="shot">
+              <img
+                loading="lazy"
+                src="https://images.unsplash.com/photo-1487412912498-0447578fcca8?auto=format&fit=crop&w=800&q=80"
+                alt=""
+              />
+              <div class="shot-caption">Light</div>
+            </div>
+
+            <div class="shot">
+              <img
+                loading="lazy"
+                src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80"
+                alt=""
+              />
+              <div class="shot-caption">Moment</div>
+            </div>
           </div>
         </div>
       </section>
@@ -130,10 +158,11 @@
             <p class="contact-subtitle">
               Povestește-mi ce ai în minte și revin cu un răspuns în 24–48h.
             </p>
-
+            <p class="form-status" id="formStatus" aria-live="polite"></p>
             <form
               class="contact-form"
-              action="https://formspree.io/f/mlgwnaaa"
+              id="contactForm"
+              action="..."
               method="POST"
             >
               <input
@@ -182,6 +211,41 @@
     <button class="back-to-top" id="backToTop" aria-label="Înapoi sus">
       ↑
     </button>
+
+    <!-- Success Modal -->
+    <div
+      class="modal"
+      id="successModal"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="successTitle"
+    >
+      <div class="modal-backdrop" data-close="true"></div>
+
+      <div class="modal-card" role="document">
+        <button
+          class="modal-x"
+          type="button"
+          aria-label="Închide"
+          data-close="true"
+        >
+          ×
+        </button>
+
+        <h3 class="modal-title" id="successTitle">Mesaj trimis</h3>
+        <p class="modal-text">Mulțumesc — revin în 24–48h.</p>
+
+        <div class="modal-actions">
+          <button class="btn btn-solid" type="button" id="closeSuccess">
+            OK
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast" aria-live="polite"></div>
 
     <script src="script.js"></script>
   </body>
