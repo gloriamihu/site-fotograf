@@ -2,12 +2,19 @@
 <html lang="ro">
   <head>
     <meta charset="UTF-8" />
-    <title>Bianca Florea Photography</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Bianca Florea – Photography</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Bianca Florea - Photography portfolio" />
-    <link rel="icon" type="image/png" href="apple-touch-icon.png" />
+    <meta
+      name="description"
+      content="Bianca Florea – Editorial wedding & portrait photography. Minimal. Refined. Timeless."
+    />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/png" href="favicon.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+
+    <!-- Open Graph -->
     <meta property="og:title" content="Bianca Florea – Photography" />
     <meta
       property="og:description"
@@ -22,11 +29,13 @@
       content="https://gloriamihu.github.io/site-fotograf/"
     />
     <meta property="og:type" content="website" />
+
+    <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
     <header class="topbar" id="topbar">
-      <div class="topbar-inner">
+      <div class="container topbar-inner">
         <a class="brand" href="#">Bianca Florea</a>
         <nav class="nav">
           <a href="#portfolio">Portofoliu</a>
@@ -36,112 +45,126 @@
       </div>
     </header>
 
-    <section class="hero">
-      <div class="hero-content">
-        <h1 class="editorial-title">
-          Bianca Florea
-          <span class="subtitle-word">Photography</span>
-        </h1>
+    <main>
+      <section class="hero">
+        <div class="hero-content">
+          <h1 class="editorial-title">
+            Bianca Florea
+            <span class="subtitle-word">Photography</span>
+          </h1>
 
-        <div class="editorial-line"></div>
+          <div class="editorial-line"></div>
 
-        <a class="btn" href="#portfolio" id="scrollBtn">Vezi portofoliu</a>
-      </div>
-    </section>
-
-    <section class="portfolio" id="portfolio">
-      <div class="container">
-        <div class="portfolio-grid">
-          <img
-            loading="lazy"
-            src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80"
-            alt=""
-          />
-          <img
-            loading="lazy"
-            src="https://images.unsplash.com/photo-1529636798458-92182e662485?auto=format&fit=crop&w=800&q=80"
-            alt=""
-          />
-          <img
-            loading="lazy"
-            src="https://images.unsplash.com/photo-1495567720989-cebdbdd97913?auto=format&fit=crop&w=800&q=80"
-            alt=""
-          />
-          <img
-            loading="lazy"
-            src="https://images.unsplash.com/photo-1505685296765-3a2736de412f?auto=format&fit=crop&w=800&q=80"
-            alt=""
-          />
-          <img
-            loading="lazy"
-            src="https://images.unsplash.com/photo-1487412912498-0447578fcca8?auto=format&fit=crop&w=800&q=80"
-            alt=""
-          />
-          <img
-            loading="lazy"
-            src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80"
-            alt=""
-          />
+          <a class="btn" href="#portfolio" id="scrollBtn">Vezi portofoliu</a>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="about" id="about">
-      <div class="container">
-        <div class="about-inner">
-          <h2>Despre mine</h2>
-          <p>
-            Sunt Bianca, fotograf specializat în nunți și portrete. Îmi place
-            lumina naturală, cadrele simple și momentele autentice. Fotografiez
-            discret, ca să rămână emoția reală.
-          </p>
+      <section class="section portfolio" id="portfolio">
+        <div class="container">
+          <div class="featured">
+            <img
+              src="https://images.unsplash.com/photo-1492724441997-5dc865305da7?auto=format&fit=crop&w=1600&q=80"
+              alt="Featured"
+              loading="lazy"
+            />
+          </div>
 
-          <div class="about-meta">
-            <div><span>Locație</span>București / România</div>
-            <div><span>Disponibilitate</span>România + Europa</div>
-            <div><span>Contact</span>bianca@email.com</div>
+          <div class="portfolio-grid">
+            <img
+              loading="lazy"
+              src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80"
+              alt=""
+            />
+            <img
+              loading="lazy"
+              src="https://images.unsplash.com/photo-1529636798458-92182e662485?auto=format&fit=crop&w=800&q=80"
+              alt=""
+            />
+            <img
+              loading="lazy"
+              src="https://images.unsplash.com/photo-1495567720989-cebdbdd97913?auto=format&fit=crop&w=800&q=80"
+              alt=""
+            />
+            <img
+              loading="lazy"
+              src="https://images.unsplash.com/photo-1505685296765-3a2736de412f?auto=format&fit=crop&w=800&q=80"
+              alt=""
+            />
+            <img
+              loading="lazy"
+              src="https://images.unsplash.com/photo-1487412912498-0447578fcca8?auto=format&fit=crop&w=800&q=80"
+              alt=""
+            />
+            <img
+              loading="lazy"
+              src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80"
+              alt=""
+            />
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="contact" id="contact">
-      <div class="container">
-        <div class="contact-inner">
-          <h2>Contact</h2>
-          <p class="contact-subtitle">
-            Povestește-mi ce ai în minte și revin cu un răspuns în 24–48h.
-          </p>
+      <section class="section about" id="about">
+        <div class="container">
+          <div class="panel">
+            <h2>Despre mine</h2>
+            <p>
+              Sunt Bianca, fotograf specializat în nunți și portrete. Îmi place
+              lumina naturală, cadrele simple și momentele autentice.
+              Fotografiez discret, ca să rămână emoția reală.
+            </p>
 
-          <form
-            class="contact-form"
-            action="mailto:bianca@email.com"
-            method="post"
-            enctype="text/plain"
-          >
-            <label>
-              Nume
-              <input type="text" name="name" required />
-            </label>
-
-            <label>
-              Email
-              <input type="email" name="email" required />
-            </label>
-
-            <label>
-              Mesaj
-              <textarea name="message" rows="5" required></textarea>
-            </label>
-
-            <button class="btn btn-dark" type="submit">Trimite</button>
-          </form>
+            <div class="about-meta">
+              <div><span>Locație</span>București / România</div>
+              <div><span>Disponibilitate</span>România + Europa</div>
+              <div><span>Contact</span>bianca@email.com</div>
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <section class="section contact" id="contact">
+        <div class="container">
+          <div class="panel">
+            <h2>Contact</h2>
+            <p class="contact-subtitle">
+              Povestește-mi ce ai în minte și revin cu un răspuns în 24–48h.
+            </p>
+
+            <form
+              class="contact-form"
+              action="https://formspree.io/f/mlgwnaaa"
+              method="POST"
+            >
+              <input
+                type="hidden"
+                name="_subject"
+                value="New message from Bianca Florea portfolio"
+              />
+              <label>
+                Nume
+                <input type="text" name="name" required />
+              </label>
+
+              <label>
+                Email
+                <input type="email" name="email" required />
+              </label>
+
+              <label>
+                Mesaj
+                <textarea name="message" rows="5" required></textarea>
+              </label>
+
+              <button class="btn btn-invert" type="submit">Trimite</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
 
     <footer class="footer">
-      <div class="footer-inner">
+      <div class="container footer-inner">
         <p class="footer-brand">Bianca Florea Photography</p>
 
         <div class="footer-links">

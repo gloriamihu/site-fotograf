@@ -1,17 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Topbar apare la scroll
+  // Topbar appear on scroll
   const topbar = document.getElementById("topbar");
-  function onScroll() {
+
+  const onScroll = () => {
     if (!topbar) return;
     if (window.scrollY > 10) topbar.classList.add("show");
     else topbar.classList.remove("show");
-  }
-  window.addEventListener("scroll", onScroll);
+  };
+
+  window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
-  // Scroll smooth către portofoliu
+  // Smooth scroll to portfolio
   const btn = document.getElementById("scrollBtn");
   const target = document.getElementById("portfolio");
+
   if (btn && target) {
     btn.addEventListener("click", (e) => {
       e.preventDefault();
@@ -19,22 +22,25 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Back to top (buton colț dreapta jos)
+  // Back to top
   const back = document.getElementById("backToTop");
-  function handleBackToTop() {
+
+  const handleBackToTop = () => {
     if (!back) return;
     if (window.scrollY > 400) back.classList.add("show");
     else back.classList.remove("show");
-  }
-  window.addEventListener("scroll", handleBackToTop);
+  };
+
+  window.addEventListener("scroll", handleBackToTop, { passive: true });
   handleBackToTop();
+
   if (back) {
     back.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
   }
 
-  // An în footer
+  // Footer year
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 });
