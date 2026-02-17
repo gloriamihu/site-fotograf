@@ -44,3 +44,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 });
+
+// Success message via URL param
+const params = new URLSearchParams(window.location.search);
+if (params.get("success") === "true") {
+  alert("Mulțumesc! Mesajul a fost trimis cu succes.");
+  window.history.replaceState({}, document.title, window.location.pathname);
+}

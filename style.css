@@ -253,34 +253,78 @@ body::before {
 
 /* ================= PORTFOLIO ================= */
 .featured {
-  margin-bottom: 70px;
-  border-radius: 18px;
+  position: relative;
+  margin-bottom: 90px;
+  border-radius: 22px;
   overflow: hidden;
-  box-shadow: var(--shadow);
 }
 
 .featured img {
   width: 100%;
-  transform: scale(1.01);
+  height: 75vh;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.85);
+  transition: transform 1.2s ease;
+}
+
+.featured::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.45)
+  );
+}
+
+.featured:hover img {
+  transform: scale(1.03);
 }
 
 .portfolio-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 26px;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 28px;
 }
 
 .portfolio-grid img {
-  border-radius: 16px;
-  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 18px;
   transition:
-    transform 450ms ease,
-    filter 450ms ease;
+    transform 600ms ease,
+    filter 600ms ease;
+}
+
+/* Ritm editorial */
+.portfolio-grid img:nth-child(1) {
+  grid-column: span 7;
+  height: 520px;
+}
+
+.portfolio-grid img:nth-child(2) {
+  grid-column: span 5;
+  height: 520px;
+}
+
+.portfolio-grid img:nth-child(3),
+.portfolio-grid img:nth-child(4) {
+  grid-column: span 6;
+  height: 400px;
+}
+
+.portfolio-grid img:nth-child(5),
+.portfolio-grid img:nth-child(6) {
+  grid-column: span 6;
+  height: 380px;
 }
 
 .portfolio-grid img:hover {
   transform: scale(1.02);
-  filter: brightness(1.06);
+  filter: brightness(1.08);
 }
 
 /* ================= ABOUT META ================= */
@@ -465,5 +509,20 @@ body::before {
   .back-to-top,
   .topbar {
     transition: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .portfolio-grid img {
+    grid-column: span 1 !important;
+    height: 280px !important;
+  }
+
+  .featured img {
+    height: 55vh;
   }
 }
