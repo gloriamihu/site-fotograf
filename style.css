@@ -2,7 +2,7 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Reset simplu */
+/* Reset */
 body {
   margin: 0;
   font-family: "Helvetica Neue", Arial, sans-serif;
@@ -12,7 +12,14 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Hero section */
+/* Container */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ================= HERO ================= */
+
 .hero {
   height: 100vh;
   display: flex;
@@ -21,21 +28,30 @@ body {
   text-align: center;
 }
 
-/* Conținut hero */
-.hero-content h1 {
+.editorial-title {
   margin: 0;
-  font-size: 64px;
-  font-weight: 300;
-  letter-spacing: 2px;
+  font-size: 72px;
+  font-weight: 200;
+  letter-spacing: 3px;
 }
 
-.hero-content p {
-  margin-top: 16px;
-  font-size: 18px;
-  opacity: 0.7;
+.subtitle-word {
+  display: block;
+  margin-top: 14px;
+  font-size: 13px;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  opacity: 0.6;
 }
 
-/* Buton minimalist */
+.editorial-line {
+  width: 50px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.4);
+  margin: 18px auto 0;
+}
+
+/* Buton */
 .btn {
   display: inline-block;
   margin-top: 28px;
@@ -48,9 +64,7 @@ body {
   text-transform: uppercase;
   cursor: pointer;
   text-decoration: none;
-  transition:
-    background 200ms ease,
-    transform 200ms ease,
+  transition: background 200ms ease, transform 200ms ease,
     border-color 200ms ease;
 }
 
@@ -60,72 +74,17 @@ body {
   border-color: rgba(255, 255, 255, 1);
 }
 
-.portfolio {
-  padding: 80px 10%;
-  background: #ffffff;
+.btn-dark {
+  border-color: rgba(0, 0, 0, 0.25);
+  color: #111;
 }
 
-.portfolio-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+.btn-dark:hover {
+  background: rgba(0, 0, 0, 0.06);
 }
 
-.portfolio-grid img {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-  display: block;
-  transition:
-    transform 250ms ease,
-    filter 250ms ease;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.14);
-}
+/* ================= TOPBAR ================= */
 
-.portfolio-grid img:hover {
-  transform: scale(1.02);
-  filter: brightness(0.9);
-}
-
-#portfolio,
-#about {
-  scroll-margin-top: 70px;
-}
-
-@media (max-width: 900px) {
-  .portfolio-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .portfolio-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .about-meta {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-content h1 {
-    font-size: 40px;
-  }
-
-  .hero-content p {
-    font-size: 16px;
-  }
-
-  .editorial-title {
-    font-size: 42px;
-  }
-
-  .subtitle-word {
-    letter-spacing: 4px;
-  }
-}
-
-/* Topbar (header) - ascuns inițial, apare la scroll */
 .topbar {
   position: fixed;
   top: 0;
@@ -135,13 +94,9 @@ body {
 
   transform: translateY(-100%);
   opacity: 0;
-  transition:
-    transform 220ms ease,
-    opacity 220ms ease,
-    background 220ms ease;
+  transition: transform 220ms ease, opacity 220ms ease;
 
   background: rgba(14, 14, 16, 0.88);
-  /* înlocuiește roșul */
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -152,13 +107,10 @@ body {
 }
 
 .topbar-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 14px 20px;
+  padding: 16px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 20px;
 }
 
 .brand {
@@ -177,17 +129,44 @@ body {
   font-size: 13px;
   letter-spacing: 0.6px;
   text-transform: uppercase;
-  opacity: 0.85;
 }
 
 .nav a:hover {
   color: white;
-  opacity: 1;
 }
+
+/* ================= PORTFOLIO ================= */
+
+.portfolio {
+  padding: 80px 10%;
+  background: #ffffff;
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.portfolio-grid img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+  transition: transform 250ms ease, filter 250ms ease;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.14);
+}
+
+.portfolio-grid img:hover {
+  transform: scale(1.02);
+  filter: brightness(0.9);
+}
+
+/* ================= ABOUT ================= */
 
 .about {
   background: #0e0e10;
-  color: white;
   padding: 90px 10%;
 }
 
@@ -233,52 +212,7 @@ body {
   text-transform: uppercase;
 }
 
-.footer {
-  background: #0e0e10;
-  color: white;
-  padding: 50px 10%;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.footer-inner {
-  max-width: 900px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.footer-brand {
-  margin: 0;
-  font-size: 14px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  opacity: 0.9;
-}
-
-.footer-links {
-  margin-top: 16px;
-  display: flex;
-  gap: 18px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.footer-links a {
-  color: rgba(255, 255, 255, 0.85);
-  text-decoration: none;
-  font-size: 13px;
-  letter-spacing: 0.4px;
-  text-transform: uppercase;
-}
-
-.footer-links a:hover {
-  color: white;
-}
-
-.footer-note {
-  margin-top: 22px;
-  font-size: 12px;
-  opacity: 0.6;
-}
+/* ================= CONTACT ================= */
 
 .contact {
   background: #ffffff;
@@ -301,7 +235,6 @@ body {
 .contact-subtitle {
   margin-top: 14px;
   color: #444;
-  opacity: 0.85;
   line-height: 1.6;
 }
 
@@ -322,7 +255,7 @@ body {
 
 .contact-form input,
 .contact-form textarea {
-  padding: 12px 12px;
+  padding: 12px;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 8px;
   font-size: 15px;
@@ -335,49 +268,53 @@ body {
   border-color: rgba(0, 0, 0, 0.35);
 }
 
-/* variantă de buton pentru fundal alb */
-.btn-dark {
-  border-color: rgba(0, 0, 0, 0.25);
-  color: #111;
+/* ================= FOOTER ================= */
+
+.footer {
+  background: #0e0e10;
+  padding: 50px 10%;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.btn-dark:hover {
-  background: rgba(0, 0, 0, 0.06);
+.footer-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
 }
 
-.editorial-title {
+.footer-brand {
   margin: 0;
-  font-size: 72px;
-  font-weight: 200;
-  letter-spacing: 3px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-.subtitle-word {
-  display: block;
-  margin-top: 14px;
+.footer-links {
+  margin-top: 16px;
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
   font-size: 13px;
-  letter-spacing: 6px;
   text-transform: uppercase;
+}
+
+.footer-links a:hover {
+  color: white;
+}
+
+.footer-note {
+  margin-top: 22px;
+  font-size: 12px;
   opacity: 0.6;
 }
 
-.editorial-line {
-  width: 50px;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.4);
-  margin: 18px auto 0;
-}
-
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-#portfolio,
-#about,
-#contact {
-  scroll-margin-top: 90px;
-}
+/* ================= BACK TO TOP ================= */
 
 .back-to-top {
   position: fixed;
@@ -400,10 +337,7 @@ body {
   pointer-events: none;
   transform: translateY(10px);
 
-  transition:
-    opacity 200ms ease,
-    transform 200ms ease,
-    background 200ms ease;
+  transition: opacity 200ms ease, transform 200ms ease;
 }
 
 .back-to-top.show {
@@ -412,6 +346,28 @@ body {
   transform: translateY(0);
 }
 
-.back-to-top:hover {
-  background: rgba(3, 98, 25, 0.15);
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 900px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .editorial-title {
+    font-size: 42px;
+  }
+
+  .subtitle-word {
+    letter-spacing: 4px;
+  }
 }
