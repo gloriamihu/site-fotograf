@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Mark JS enabled
+  // Mark JS enabled (CSS reveal runs only when JS works)
   document.documentElement.classList.add("js");
 
   // ===== Topbar appear on scroll =====
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
-  // ===== Smooth scroll to portfolio =====
+  // ===== Smooth scroll to portfolio (hero button) =====
   const btn = document.getElementById("scrollBtn");
   const target = document.getElementById("portfolio");
   if (btn && target) {
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // ===== Success modal + toast + reset on Back =====
+  // ===== Success modal + toast + form reset (Formspree) =====
   const form = document.getElementById("contactForm");
   const modal = document.getElementById("successModal");
   const closeBtn = document.getElementById("closeSuccess");
@@ -60,9 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
-
-    // focus on OK button (accessibility + "premium feel")
-    if (closeBtn) closeBtn.focus();
+    if (closeBtn) closeBtn.focus(); // accessibility + premium feel
   };
 
   const closeModal = () => {
@@ -73,9 +71,17 @@ document.addEventListener("DOMContentLoaded", () => {
     showToast("Mesaj trimis ✓");
   };
 
-  // Close actions: OK button / X / backdrop click
+  // Set a flag on submit so we can show modal even if ?success=true is missing
+  if (form) {
+    form.addEventListener("submit", () => {
+      localStorage.setItem("formSuccess", "1");
+    });
+  }
+
+  // Close modal: OK button
   if (closeBtn) closeBtn.addEventListener("click", closeModal);
 
+  // Close modal: X or backdrop click (elements with data-close="true")
   if (modal) {
     modal.addEventListener("click", (e) => {
       const t = e.target;
@@ -83,27 +89,37 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ESC closes modal
+  // Close modal: ESC
   window.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && modal && modal.classList.contains("is-open")) {
       closeModal();
     }
   });
 
-  // If redirected back with ?success=true (Formspree redirect), show modal and clear URL
+  // Show modal on redirect (?success=true) OR local flag
   const params = new URLSearchParams(window.location.search);
-  if (params.get("success") === "true") {
+  const fromSuccessParam = params.get("success") === "true";
+  const fromLocalFlag = localStorage.getItem("formSuccess") === "1";
+
+  if (fromSuccessParam || fromLocalFlag) {
     if (form) form.reset();
     openModal();
-    window.history.replaceState({}, document.title, window.location.pathname);
+    localStorage.removeItem("formSuccess");
+
+    // clean URL + jump to contact
+    window.history.replaceState(
+      {},
+      document.title,
+      window.location.pathname + "#contact",
+    );
   }
 
-  // If user hits Back and page is restored from bfcache, clear form
+  // If user hits Back and Safari restores from bfcache, clear form
   window.addEventListener("pageshow", (e) => {
     if (e.persisted && form) form.reset();
   });
 
-  // ===== Scroll reveal (optional, if you already have reveal CSS) =====
+  // ===== Scroll reveal + stagger (featured, panels, shots) =====
   const revealEls = document.querySelectorAll(".featured, .panel, .shot");
   if (revealEls.length) {
     const io = new IntersectionObserver(
@@ -123,7 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // stagger only for gallery shots
       if (el.classList.contains("shot")) {
-        const delay = (i % 6) * 70;
+        const delay = (i % 6) * 70; // 0, 70, 140...
         el.style.setProperty("--d", `${delay}ms`);
       }
 
