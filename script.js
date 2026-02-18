@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Mark JS enabled (CSS reveal runs only when JS works)
+  // Mark JS as enabled (so CSS reveal only applies when JS works)
   document.documentElement.classList.add("js");
 
-  // ===== Topbar appear on scroll =====
+  // ===== Topbar: appear on scroll =====
   const topbar = document.getElementById("topbar");
   const onScroll = () => {
     if (!topbar) return;
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
-  // ===== Smooth scroll to portfolio (hero button) =====
+  // ===== Smooth scroll to portfolio (button) =====
   const btn = document.getElementById("scrollBtn");
   const target = document.getElementById("portfolio");
   if (btn && target) {
@@ -42,17 +42,56 @@ document.addEventListener("DOMContentLoaded", () => {
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // ===== Success modal + toast + form reset (Formspree) =====
+  // ===== Scroll reveal + stagger =====
+  const revealEls = document.querySelectorAll(".featured, .panel, .shot");
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("reveal");
+          io.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12 },
+  );
+
+  revealEls.forEach((el, i) => {
+    el.classList.add("reveal-init");
+
+    // stagger only for gallery shots
+    if (el.classList.contains("shot")) {
+      const delay = (i % 6) * 70; // 0, 70, 140...
+      el.style.setProperty("--d", `${delay}ms`);
+    }
+
+    io.observe(el);
+  });
+
+  // ============================================================
+  // ===== Success Modal + GUARANTEED toast on close =====
+  // ============================================================
+
   const form = document.getElementById("contactForm");
   const modal = document.getElementById("successModal");
-  const closeBtn = document.getElementById("closeSuccess");
   const toast = document.getElementById("toast");
+  const closeBtn = document.getElementById("closeSuccess");
+
+  let toastTimer = null;
 
   const showToast = (msg) => {
     if (!toast) return;
     toast.textContent = msg;
+
+    // reset (so it can replay even if already shown)
+    toast.classList.remove("show");
+    // force reflow
+    void toast.offsetHeight;
+
     toast.classList.add("show");
-    window.setTimeout(() => toast.classList.remove("show"), 1600);
+    if (toastTimer) window.clearTimeout(toastTimer);
+    toastTimer = window.setTimeout(() => toast.classList.remove("show"), 1600);
   };
 
   const openModal = () => {
@@ -60,53 +99,26 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
-    if (closeBtn) closeBtn.focus(); // accessibility + premium feel
   };
 
   const closeModal = () => {
     if (!modal) return;
+
     modal.classList.remove("is-open");
     modal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
+
+    // ✅ Guaranteed toast (single source of truth)
     showToast("Mesaj trimis ✓");
   };
 
-  // Set a flag on submit so we can show modal even if ?success=true is missing
-  if (form) {
-    form.addEventListener("submit", () => {
-      localStorage.setItem("formSuccess", "1");
-    });
-  }
-
-  // Close modal: OK button
-  if (closeBtn) closeBtn.addEventListener("click", closeModal);
-
-  // Close modal: X or backdrop click (elements with data-close="true")
-  if (modal) {
-    modal.addEventListener("click", (e) => {
-      const t = e.target;
-      if (t && t.dataset && t.dataset.close === "true") closeModal();
-    });
-  }
-
-  // Close modal: ESC
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modal && modal.classList.contains("is-open")) {
-      closeModal();
-    }
-  });
-
-  // Show modal on redirect (?success=true) OR local flag
+  // 1) If redirected back with ?success=true -> reset form + open modal + clean URL
   const params = new URLSearchParams(window.location.search);
-  const fromSuccessParam = params.get("success") === "true";
-  const fromLocalFlag = localStorage.getItem("formSuccess") === "1";
-
-  if (fromSuccessParam || fromLocalFlag) {
+  if (params.get("success") === "true") {
     if (form) form.reset();
     openModal();
-    localStorage.removeItem("formSuccess");
 
-    // clean URL + jump to contact
+    // keep user at contact section + remove query param
     window.history.replaceState(
       {},
       document.title,
@@ -114,36 +126,26 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   }
 
-  // If user hits Back and Safari restores from bfcache, clear form
+  // 2) If user hits Back and browser restores from bfcache -> clear form
   window.addEventListener("pageshow", (e) => {
     if (e.persisted && form) form.reset();
   });
 
-  // ===== Scroll reveal + stagger (featured, panels, shots) =====
-  const revealEls = document.querySelectorAll(".featured, .panel, .shot");
-  if (revealEls.length) {
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("reveal");
-            io.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12 },
-    );
+  // 3) Close modal: OK button
+  if (closeBtn) closeBtn.addEventListener("click", closeModal);
 
-    revealEls.forEach((el, i) => {
-      el.classList.add("reveal-init");
-
-      // stagger only for gallery shots
-      if (el.classList.contains("shot")) {
-        const delay = (i % 6) * 70; // 0, 70, 140...
-        el.style.setProperty("--d", `${delay}ms`);
-      }
-
-      io.observe(el);
+  // 4) Close modal: X button or backdrop click
+  if (modal) {
+    modal.addEventListener("click", (e) => {
+      const t = e.target;
+      if (t && t.dataset && t.dataset.close === "true") closeModal();
     });
   }
+
+  // 5) Close modal: ESC
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal && modal.classList.contains("is-open")) {
+      closeModal();
+    }
+  });
 });

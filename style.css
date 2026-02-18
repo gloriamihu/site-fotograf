@@ -312,16 +312,6 @@ body::before {
   gap: 28px;
 }
 
-.portfolio-grid img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 18px;
-  transition:
-    transform 600ms ease,
-    filter 600ms ease;
-}
-
 /* Ritm editorial */
 .portfolio-grid .shot:nth-child(1) {
   grid-column: span 7;
@@ -565,9 +555,10 @@ body::before {
 @media (max-width: 900px) {
   .portfolio-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
   }
 
-  .portfolio-grid img {
+  .portfolio-grid .shot {
     grid-column: span 1 !important;
     height: 280px !important;
   }
